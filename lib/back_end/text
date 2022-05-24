@@ -1,0 +1,17 @@
+dbHelper.deleteCommand(snapshot.data[index].id,'Commandes');
+  Fluttertoast.showToast(msg: 'Supprimer du panier', toastLength: Toast.LENGTH_SHORT, backgroundColor: Color(0xFFFFFFFF), textColor: Color(0xFF333333));
+    ft.then((data) async{ 
+      await Future.delayed(Duration(milliseconds: 100));
+      getProductFromDB(data[0].id).then((val){
+        prices=0;
+        for(var i in val){
+          prices += (i.quantity*i.price);
+        }
+        setState((){
+          items=val.length;
+          tprice=prices;
+        });
+      }); 
+      }
+      ,onError: (e) {print(e);}
+    );
